@@ -1,0 +1,14 @@
+numpy
+pandas
+scikit-learn
+joblib
+matplotlib
+dvc
+dagshub
+mlflow
+fastapi
+uvicorn
+streamlit
+requests
+pydantic
+pyyaml

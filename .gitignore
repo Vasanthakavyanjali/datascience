@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets
+.env
+.dvc/config.local
+
+# MLflow local database
+mlflow.db
+mlflow.db-shm
+mlflow.db-wal
+
+# Testing
+.pytest_cache/
+
+# Logs
+*.log
+
+# DVC cache
+.dvc/cache/

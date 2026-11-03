@@ -1,0 +1,79 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/data_loader.py
+    deps:
+    - path: src/data_loader.py
+      hash: md5
+      md5: bf3d8a59366782c5bee5c4fc0c49c421
+      size: 523
+    outs:
+    - path: data/raw/housing.csv
+      hash: md5
+      md5: fa9fe4cf24f70b69ac65fb33062ddf34
+      size: 1915795
+  preprocess:
+    cmd: python src/data_preprocessing.py
+    deps:
+    - path: data/raw/housing.csv
+      hash: md5
+      md5: fa9fe4cf24f70b69ac65fb33062ddf34
+      size: 1915795
+    - path: src/data_preprocessing.py
+      hash: md5
+      md5: 0edc24a9fd921eaabd377b43fa26dab9
+      size: 1098
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: f2c2766a8557fcd5cd58b63f4274b957
+      size: 382708
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 4985174206dabb123c07e04c64d15f0a
+      size: 1533174
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: f2c2766a8557fcd5cd58b63f4274b957
+      size: 382708
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 4985174206dabb123c07e04c64d15f0a
+      size: 1533174
+    - path: src/train.py
+      hash: md5
+      md5: 2ce9fe4cb10affb110cf4d2fe15b36da
+      size: 2530
+    params:
+      params.yaml:
+        train.max_depth: 15
+        train.n_estimators: 100
+        train.random_state: 42
+    outs:
+    - path: models/house_price_model.pkl
+      hash: md5
+      md5: bedf3a9336c16de391c5900ee14d87d9
+      size: 59860817
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: f2c2766a8557fcd5cd58b63f4274b957
+      size: 382708
+    - path: models/house_price_model.pkl
+      hash: md5
+      md5: bedf3a9336c16de391c5900ee14d87d9
+      size: 59860817
+    - path: src/evaluate.py
+      hash: md5
+      md5: 20679b98d5a6610ef9b96753b1a054b4
+      size: 1104
+    outs:
+    - path: reports/metrics.json
+      hash: md5
+      md5: 13eff11d4600b2218f0ad012d521f107
+      size: 89
