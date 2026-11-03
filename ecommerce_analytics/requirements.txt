@@ -1,0 +1,10 @@
+# E-Commerce Sales Analytics - Python Packages
+
+pandas
+numpy
+streamlit
+plotly
+openpyxl
+python-dotenv
+pytest
+matplotlib
